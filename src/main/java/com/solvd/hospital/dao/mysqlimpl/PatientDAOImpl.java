@@ -1,4 +1,4 @@
-package com.solvd.hospital.dao.impl;
+package com.solvd.hospital.dao.mysqlimpl;
 
 import com.solvd.hospital.dao.IPatientDAO;
 import com.solvd.hospital.model.Patient;

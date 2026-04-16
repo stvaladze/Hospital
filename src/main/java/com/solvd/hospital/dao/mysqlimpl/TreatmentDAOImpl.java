@@ -1,21 +1,21 @@
-package com.solvd.hospital.dao.impl;
+package com.solvd.hospital.dao.mysqlimpl;
 
-import com.solvd.hospital.dao.IDoctorDAO;
-import com.solvd.hospital.model.Doctor;
+import com.solvd.hospital.dao.ITreatmentDAO;
+import com.solvd.hospital.model.Treatment;
 import com.solvd.hospital.pool.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorDAOImpl implements IDoctorDAO {
+public class TreatmentDAOImpl implements ITreatmentDAO {
 
     private ConnectionPool pool = ConnectionPool.getInstance();
 
     @Override
-    public void create(Doctor doctor) {
+    public void create(Treatment treatment) {
 
-        String sql = "INSERT INTO doctors(first_name, last_name) VALUES (?, ?)";
+        String sql = "INSERT INTO treatment(name) VALUES (?)";
 
         Connection conn = null;
 
@@ -23,23 +23,22 @@ public class DoctorDAOImpl implements IDoctorDAO {
             conn = pool.getConnection();
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, doctor.getFirstName());
-            stmt.setString(2, doctor.getLastName());
+            stmt.setString(1, treatment.getName());
 
             stmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            pool.releaseConnection(conn);
+            if (conn != null) pool.releaseConnection(conn);
         }
     }
 
     @Override
-    public List<Doctor> getAll() {
+    public List<Treatment> getAll() {
 
-        List<Doctor> list = new ArrayList<>();
-        String sql = "SELECT * FROM doctors";
+        List<Treatment> list = new ArrayList<>();
+        String sql = "SELECT * FROM treatment";
 
         Connection conn = null;
 
@@ -50,18 +49,17 @@ public class DoctorDAOImpl implements IDoctorDAO {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Doctor d = new Doctor();
-                d.setId(rs.getInt("id"));
-                d.setFirstName(rs.getString("first_name"));
-                d.setLastName(rs.getString("last_name"));
+                Treatment t = new Treatment();
+                t.setId(rs.getInt("id"));
+                t.setName(rs.getString("name"));
 
-                list.add(d);
+                list.add(t);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            pool.releaseConnection(conn);
+            if (conn != null) pool.releaseConnection(conn);
         }
 
         return list;
