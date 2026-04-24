@@ -1,15 +1,28 @@
 package com.solvd.hospital.model;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.time.LocalDateTime;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Appointment {
 
+    @XmlElement
     private int id;
+
+    // ✅ For JAXB (XML uses IDs)
+    @XmlElement(name = "patient_id")
+    private int patientId;
+
+    @XmlElement(name = "doctor_id")
+    private int doctorId;
+
+    @XmlElement(name = "appointment_date")
+    private String appointmentDate;
+
 
     private Patient patient;
     private Doctor doctor;
-
-    private LocalDateTime appointmentDate;
 
     public int getId() {
         return id;
@@ -17,6 +30,30 @@ public class Appointment {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
     public Doctor getDoctor() {
@@ -33,13 +70,5 @@ public class Appointment {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
-    }
-
-    public LocalDateTime getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(LocalDateTime appointmentDate) {
-        this.appointmentDate = appointmentDate;
     }
 }

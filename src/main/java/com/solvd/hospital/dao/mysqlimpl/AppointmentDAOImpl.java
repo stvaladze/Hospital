@@ -72,7 +72,7 @@ public class AppointmentDAOImpl implements IAppointmentDAO {
                 a.setId(rs.getInt("id"));
                 a.setPatient(p);
                 a.setDoctor(d);
-                a.setAppointmentDate(rs.getTimestamp("appointment_date").toLocalDateTime());
+                a.setAppointmentDate(rs.getString("appointment_date"));
 
                 list.add(a);
             }

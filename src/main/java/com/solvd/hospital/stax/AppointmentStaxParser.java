@@ -27,9 +27,7 @@ public class AppointmentStaxParser {
                     current = new Appointment();
 
                 } else if ("appointment_date".equals(name)) {
-                    current.setAppointmentDate(
-                            LocalDateTime.parse(reader.getElementText())
-                    );
+                    current.setAppointmentDate(reader.getElementText());
 
                 } else if ("patient_id".equals(name)) {
                     Patient p = new Patient();

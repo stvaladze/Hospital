@@ -1,12 +1,21 @@
 package com.solvd.hospital.model;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Doctor {
 
+    @XmlElement
     private int id;
+
+    @XmlElement(name = "first_name")
     private String firstName;
+
+    @XmlElement(name = "last_name")
     private String lastName;
+
 
     private Specialization specialization;
     private List<Appointment> appointments;

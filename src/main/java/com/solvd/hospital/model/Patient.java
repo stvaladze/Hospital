@@ -1,18 +1,36 @@
 package com.solvd.hospital.model;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Patient {
 
+    @XmlElement
     private int id;
+
+    @XmlElement(name = "first_name")
     private String firstName;
+
+    @XmlElement(name = "last_name")
     private String lastName;
-    private LocalDateTime dateOfBirth;
+
+    @XmlElement(name = "date_of_birth")
+    private String dateOfBirth;
+    @XmlElement
     private String gender;
+
+    @XmlElement
     private String email;
+
+    @XmlElement
     private String phone;
+
+    @XmlElement
     private String address;
+
 
     private List<Appointment> appointments;
     private List<Diagnosis> diagnoses;
@@ -43,11 +61,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
