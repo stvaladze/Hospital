@@ -1,7 +1,7 @@
 package com.solvd.hospital.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.xml.bind.annotation.*;
-
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -10,12 +10,13 @@ public class Doctor {
     @XmlElement
     private int id;
 
+    @JsonProperty("first_name")
     @XmlElement(name = "first_name")
     private String firstName;
 
+    @JsonProperty("last_name")
     @XmlElement(name = "last_name")
     private String lastName;
-
 
     private Specialization specialization;
     private List<Appointment> appointments;
@@ -38,20 +39,20 @@ public class Doctor {
         this.firstName = firstName;
     }
 
-    public Specialization getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(Specialization specialization) {
-        this.specialization = specialization;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
     }
 
     public List<Appointment> getAppointments() {

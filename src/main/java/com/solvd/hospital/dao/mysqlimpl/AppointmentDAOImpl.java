@@ -14,31 +14,23 @@ public class AppointmentDAOImpl implements IAppointmentDAO {
 
     @Override
     public void create(Appointment appointment) {
-
         String sql = "INSERT INTO appointments(patient_id, doctor_id, appointment_date) VALUES (?, ?, ?)";
 
-        Connection conn = null;
+        try (Connection conn = pool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        try {
-            conn = pool.getConnection();
-
-            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, appointment.getPatient().getId());
             stmt.setInt(2, appointment.getDoctor().getId());
             stmt.setTimestamp(3, Timestamp.valueOf(appointment.getAppointmentDate()));
-
             stmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) pool.releaseConnection(conn);
         }
     }
 
     @Override
     public List<Appointment> getAll() {
-
         List<Appointment> list = new ArrayList<>();
 
         String sql = """
@@ -50,16 +42,12 @@ public class AppointmentDAOImpl implements IAppointmentDAO {
             JOIN doctors d ON a.doctor_id = d.id
         """;
 
-        Connection conn = null;
+        try (Connection conn = pool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        try {
-            conn = pool.getConnection();
-
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-
                 Patient p = new Patient();
                 p.setId(rs.getInt("p_id"));
                 p.setFirstName(rs.getString("p_name"));
@@ -79,8 +67,6 @@ public class AppointmentDAOImpl implements IAppointmentDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) pool.releaseConnection(conn);
         }
 
         return list;

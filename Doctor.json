@@ -1,0 +1,9 @@
+{
+  "id" : 1,
+  "specialization" : null,
+  "appointments" : null,
+  "prescriptions" : null,
+  "departments" : null,
+  "first_name" : "John",
+  "last_name" : "Smith"
+}

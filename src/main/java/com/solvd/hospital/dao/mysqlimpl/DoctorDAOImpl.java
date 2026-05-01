@@ -17,12 +17,10 @@ public class DoctorDAOImpl implements IDoctorDAO {
 
         String sql = "INSERT INTO doctors(first_name, last_name) VALUES (?, ?)";
 
-        Connection conn = null;
+        try (
+            Connection conn = pool.getConnection();
 
-        try {
-            conn = pool.getConnection();
-
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, doctor.getFirstName());
             stmt.setString(2, doctor.getLastName());
 
@@ -30,8 +28,6 @@ public class DoctorDAOImpl implements IDoctorDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            pool.releaseConnection(conn);
         }
     }
 
@@ -41,13 +37,12 @@ public class DoctorDAOImpl implements IDoctorDAO {
         List<Doctor> list = new ArrayList<>();
         String sql = "SELECT * FROM doctors";
 
-        Connection conn = null;
 
-        try {
-            conn = pool.getConnection();
+        try (
+           Connection conn = pool.getConnection();
 
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Doctor d = new Doctor();
@@ -60,9 +55,8 @@ public class DoctorDAOImpl implements IDoctorDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            pool.releaseConnection(conn);
         }
+
 
         return list;
     }

@@ -17,20 +17,17 @@ public class TreatmentDAOImpl implements ITreatmentDAO {
 
         String sql = "INSERT INTO treatment(name) VALUES (?)";
 
-        Connection conn = null;
 
-        try {
-            conn = pool.getConnection();
+        try (
+            Connection conn = pool.getConnection();
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setString(1, treatment.getName());
 
             stmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) pool.releaseConnection(conn);
         }
     }
 
@@ -40,13 +37,12 @@ public class TreatmentDAOImpl implements ITreatmentDAO {
         List<Treatment> list = new ArrayList<>();
         String sql = "SELECT * FROM treatment";
 
-        Connection conn = null;
 
-        try {
-            conn = pool.getConnection();
+        try (
+           Connection conn = pool.getConnection();
 
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Treatment t = new Treatment();
@@ -58,8 +54,6 @@ public class TreatmentDAOImpl implements ITreatmentDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) pool.releaseConnection(conn);
         }
 
         return list;
