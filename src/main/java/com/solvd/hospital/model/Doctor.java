@@ -28,6 +28,9 @@ public class Doctor {
     }
 
     public void setId(int id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Doctor ID must be positive, got: " + id);
+        }
         this.id = id;
     }
 
@@ -36,6 +39,9 @@ public class Doctor {
     }
 
     public void setFirstName(String firstName) {
+        if (firstName == null || firstName.isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty");
+        }
         this.firstName = firstName;
     }
 
@@ -44,6 +50,9 @@ public class Doctor {
     }
 
     public void setLastName(String lastName) {
+        if (lastName == null || lastName.isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty");
+        }
         this.lastName = lastName;
     }
 
