@@ -15,11 +15,27 @@ public class Diagnosis {
 
     private List<Patient> patients;
 
+    @Override
+    public String toString() {
+        return "Diagnosis{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
+
+        if (id <= 0) {
+
+            throw new IllegalArgumentException(
+                    "Diagnosis ID must be positive."
+            );
+        }
+
         this.id = id;
     }
 
@@ -28,6 +44,14 @@ public class Diagnosis {
     }
 
     public void setName(String name) {
+
+        if (name == null || name.isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "Diagnosis name cannot be empty."
+            );
+        }
+
         this.name = name;
     }
 

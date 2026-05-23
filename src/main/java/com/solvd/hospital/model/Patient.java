@@ -37,11 +37,26 @@ public class Patient {
     private List<Treatment> treatments;
     private List<Prescription> prescriptions;
 
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException(
+                    "Patient ID must be positive."
+            );
+        }
+
         this.id = id;
     }
 
@@ -50,14 +65,29 @@ public class Patient {
     }
 
     public void setFirstName(String firstName) {
+
+        if (firstName == null || firstName.isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "First name cannot be empty."
+            );
+        }
+
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
+
+        if (lastName == null || lastName.isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "Last name cannot be empty."
+            );
+        }
+
         this.lastName = lastName;
     }
 

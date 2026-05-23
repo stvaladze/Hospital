@@ -6,7 +6,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.Reader;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MyBatisUtil {
+
+    private static final Logger logger =
+            Logger.getLogger(MyBatisUtil.class.getName());
 
     private static SqlSessionFactory factory;
 
@@ -23,9 +29,12 @@ public class MyBatisUtil {
                     new SqlSessionFactoryBuilder()
                             .build(reader);
 
+            logger.info("SqlSessionFactory initialized successfully.");
+
         } catch (Exception e) {
 
-            e.printStackTrace();
+            logger.log(Level.SEVERE,
+                    "Error while initializing SqlSessionFactory.", e);
         }
     }
 

@@ -24,19 +24,44 @@ public class Appointment {
     private Patient patient;
     private Doctor doctor;
 
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", patientId=" + patientId +
+                ", doctorId=" + doctorId +
+                ", appointmentDate='" + appointmentDate + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
+
+        if (id <= 0) {
+
+            throw new IllegalArgumentException(
+                    "Appointment ID must be positive."
+            );
+        }
+
         this.id = id;
     }
-
     public int getPatientId() {
         return patientId;
     }
 
     public void setPatientId(int patientId) {
+
+        if (patientId <= 0) {
+
+            throw new IllegalArgumentException(
+                    "Patient ID must be positive."
+            );
+        }
+
         this.patientId = patientId;
     }
 
@@ -45,6 +70,14 @@ public class Appointment {
     }
 
     public void setDoctorId(int doctorId) {
+
+        if (doctorId <= 0) {
+
+            throw new IllegalArgumentException(
+                    "Doctor ID must be positive."
+            );
+        }
+
         this.doctorId = doctorId;
     }
 
@@ -53,6 +86,15 @@ public class Appointment {
     }
 
     public void setAppointmentDate(String appointmentDate) {
+
+        if (appointmentDate == null
+                || appointmentDate.isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "Appointment date cannot be empty."
+            );
+        }
+
         this.appointmentDate = appointmentDate;
     }
 

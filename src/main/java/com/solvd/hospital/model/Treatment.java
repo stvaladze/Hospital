@@ -16,11 +16,27 @@ public class Treatment {
 
     private List<Patient> patients;
 
+    @Override
+    public String toString() {
+        return "Treatment{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
+
+        if (id <= 0) {
+
+            throw new IllegalArgumentException(
+                    "Treatment ID must be positive."
+            );
+        }
+
         this.id = id;
     }
 
@@ -29,6 +45,14 @@ public class Treatment {
     }
 
     public void setName(String name) {
+
+        if (name == null || name.isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "Treatment name cannot be empty."
+            );
+        }
+
         this.name = name;
     }
 

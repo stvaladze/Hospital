@@ -4,14 +4,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="DoctorMapper">
+<mapper namespace="com.solvd.hospital.dao.IDoctorDAO">
 
-    <insert id="insert">
+    <insert id="create">
+
         INSERT INTO doctors(first_name, last_name)
         VALUES (#{firstName}, #{lastName})
+
     </insert>
 
-    <select id="selectById"
+    <select id="getById"
             parameterType="int"
             resultType="com.solvd.hospital.model.Doctor">
 
@@ -21,7 +23,7 @@
 
     </select>
 
-    <select id="selectAll"
+    <select id="getAll"
             resultType="com.solvd.hospital.model.Doctor">
 
         SELECT *

@@ -1,13 +1,19 @@
-<mapper namespace="PatientMapper">
+<?xml version="1.0" encoding="UTF-8" ?>
 
-    <insert id="insert">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.hospital.dao.IPatientDAO">
+
+    <insert id="create">
 
         INSERT INTO patients(first_name, last_name)
         VALUES (#{firstName}, #{lastName})
 
     </insert>
 
-    <select id="selectById"
+    <select id="getById"
             parameterType="int"
             resultType="com.solvd.hospital.model.Patient">
 
@@ -17,7 +23,7 @@
 
     </select>
 
-    <select id="selectAll"
+    <select id="getAll"
             resultType="com.solvd.hospital.model.Patient">
 
         SELECT *
