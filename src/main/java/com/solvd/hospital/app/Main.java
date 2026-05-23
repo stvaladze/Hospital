@@ -1,6 +1,5 @@
 package com.solvd.hospital.app;
 
-import com.solvd.hospital.mybatis.mapper.DoctorMapper;
 import com.solvd.hospital.model.Doctor;
 import com.solvd.hospital.model.Hospital;
 import com.solvd.hospital.stax.StaxParser;

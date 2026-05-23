@@ -6,10 +6,8 @@ import java.util.List;
 public interface IAppointmentDAO {
 
     void create(Appointment appointment);
-
     Appointment getById(int id);
-
     List<Appointment> getAll();
-
+    void update(Appointment appointment);
     void delete(int id);
 }

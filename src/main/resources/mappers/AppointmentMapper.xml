@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AppointmentMapper">
+
+
+    <resultMap id="AppointmentResultMap"
+               type="com.solvd.hospital.model.Appointment">
+
+        <id property="id" column="id"/>
+
+        <result property="patientId" column="patient_id"/>
+
+        <result property="doctorId" column="doctor_id"/>
+
+        <result property="appointmentDate"
+                column="appointment_date"/>
+
+    </resultMap>
+
+
+    <insert id="insert">
+
+        INSERT INTO appointments
+        (
+        patient_id,
+        doctor_id,
+        appointment_date
+        )
+
+        VALUES
+        (
+        #{patientId},
+        #{doctorId},
+        #{appointmentDate}
+        )
+
+    </insert>
+
+
+    <select id="selectById"
+            parameterType="int"
+            resultMap="AppointmentResultMap">
+
+        SELECT *
+        FROM appointments
+        WHERE id = #{id}
+
+    </select>
+
+
+    <select id="selectAll"
+            resultMap="AppointmentResultMap">
+
+        SELECT *
+        FROM appointments
+
+    </select>
+
+
+    <update id="update">
+
+        UPDATE appointments
+
+        SET patient_id = #{patientId},
+        doctor_id = #{doctorId},
+        appointment_date = #{appointmentDate}
+
+        WHERE id = #{id}
+
+    </update>
+
+
+    <delete id="delete">
+
+        DELETE FROM appointments
+        WHERE id = #{id}
+
+    </delete>
+
+</mapper>

@@ -4,43 +4,44 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="DoctorMapper">
+<mapper namespace="TreatmentMapper">
 
     <insert id="insert">
-        INSERT INTO doctors(first_name, last_name)
-        VALUES (#{firstName}, #{lastName})
+
+        INSERT INTO treatments(name)
+        VALUES (#{name})
+
     </insert>
 
     <select id="selectById"
             parameterType="int"
-            resultType="com.solvd.hospital.model.Doctor">
+            resultType="com.solvd.hospital.model.Treatment">
 
         SELECT *
-        FROM doctors
+        FROM treatments
         WHERE id = #{id}
 
     </select>
 
     <select id="selectAll"
-            resultType="com.solvd.hospital.model.Doctor">
+            resultType="com.solvd.hospital.model.Treatment">
 
         SELECT *
-        FROM doctors
+        FROM treatments
 
     </select>
 
     <update id="update">
 
-        UPDATE doctors
-        SET first_name = #{firstName},
-        last_name = #{lastName}
+        UPDATE treatments
+        SET name = #{name}
         WHERE id = #{id}
 
     </update>
 
     <delete id="delete">
 
-        DELETE FROM doctors
+        DELETE FROM treatments
         WHERE id = #{id}
 
     </delete>

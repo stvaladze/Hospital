@@ -10,7 +10,7 @@ public class Appointment {
     @XmlElement
     private int id;
 
-    // ✅ For JAXB (XML uses IDs)
+
     @XmlElement(name = "patient_id")
     private int patientId;
 

@@ -16,6 +16,10 @@
     </environments>
     <mappers>
         <mapper resource="mappers/DoctorMapper.xml"/>
+        <mapper resource="mappers/PatientMapper.xml"/>
+        <mapper resource="mappers/DiagnosisMapper.xml"/>
+        <mapper resource="mappers/TreatmentMapper.xml"/>
+        <mapper resource="mappers/AppointmentMapper.xml"/>
     </mappers>
 </configuration>
 
